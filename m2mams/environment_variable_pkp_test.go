@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestLoadKeyFromExistingSpecificVar(t *testing.T) {
+func TestLoadKeyFromSpecificVar(t *testing.T) {
 	fakeEnv := NewFakeEnv()
 	pkp := EnvironmentVariablePKProvider{
 		environment: fakeEnv,
