@@ -1,14 +1,15 @@
-package m2mams
+package m2mams_pkp
 
 import (
 	"crypto/rsa"
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/flsusp/m2mams-go-client/m2mams"
 	"strings"
 )
 
 type EnvironmentVariablePKProvider struct {
-	environment Environment
+	environment m2mams.Environment
 }
 
 func (w EnvironmentVariablePKProvider) LoadKey(context string, keyPair string) (*rsa.PrivateKey, error) {

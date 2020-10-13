@@ -1,4 +1,4 @@
-package m2mams
+package m2mams_pkp
 
 import (
 	"crypto/rsa"
