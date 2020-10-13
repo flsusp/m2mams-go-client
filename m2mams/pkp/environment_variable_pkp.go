@@ -9,7 +9,7 @@ import (
 )
 
 type EnvironmentVariablePKProvider struct {
-	environment m2mams.Environment
+	Environment m2mams.Environment
 }
 
 func (w EnvironmentVariablePKProvider) LoadKey(context string, keyPair string) (*rsa.PrivateKey, error) {
@@ -35,8 +35,25 @@ func (w EnvironmentVariablePKProvider) LoadKey(context string, keyPair string) (
 	return nil, fmt.Errorf("one of %s or %s environment variables should be defined", specificContextKeyParVar, genericVar)
 }
 
+func (w EnvironmentVariablePKProvider) LoadKeyUid(context string, keyPair string) (string, error) {
+	genericVar := "M2MAMS-UID"
+	specificContextKeyParVar := strings.ToUpper(fmt.Sprintf("%s-%s-UID", context, keyPair))
+
+	uid := w.Environment.Getenv(specificContextKeyParVar)
+	if uid != "" {
+		return uid, nil
+	}
+
+	uid = w.Environment.Getenv(genericVar)
+	if uid != "" {
+		return uid, nil
+	}
+
+	return "", fmt.Errorf("one of %s or %s environment variables should be defined", specificContextKeyParVar, genericVar)
+}
+
 func (w EnvironmentVariablePKProvider) loadKeyFromEnvVar(envVarName string) (*rsa.PrivateKey, error, bool) {
-	keyData := w.environment.Getenv(envVarName)
+	keyData := w.Environment.Getenv(envVarName)
 	if keyData != "" {
 		key, err := jwt.ParseRSAPrivateKeyFromPEM([]byte(keyData))
 		if err != nil {
