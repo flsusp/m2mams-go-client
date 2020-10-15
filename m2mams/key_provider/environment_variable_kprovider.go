@@ -8,11 +8,17 @@ import (
 	"strings"
 )
 
-type EnvironmentVariablePKProvider struct {
+type EnvironmentVariableKProvider struct {
 	Environment m2mams.Environment
 }
 
-func (w EnvironmentVariablePKProvider) LoadPrivateKey(context string, keyPair string) (*rsa.PrivateKey, error) {
+func NewEnvironmentVariableKProvider() KeyProvider {
+	return EnvironmentVariableKProvider{
+		Environment: m2mams.OsEnv{},
+	}
+}
+
+func (w EnvironmentVariableKProvider) LoadPrivateKey(context string, keyPair string) (*rsa.PrivateKey, error) {
 	genericVar := "M2MAMS-PK"
 	specificContextKeyParVar := strings.ToUpper(fmt.Sprintf("%s-%s-PK", context, keyPair))
 
@@ -35,7 +41,7 @@ func (w EnvironmentVariablePKProvider) LoadPrivateKey(context string, keyPair st
 	return nil, fmt.Errorf("one of %s or %s environment variables should be defined", specificContextKeyParVar, genericVar)
 }
 
-func (w EnvironmentVariablePKProvider) LoadKeyUid(context string, keyPair string) (string, error) {
+func (w EnvironmentVariableKProvider) LoadKeyUid(context string, keyPair string) (string, error) {
 	genericVar := "M2MAMS-UID"
 	specificContextKeyParVar := strings.ToUpper(fmt.Sprintf("%s-%s-UID", context, keyPair))
 
@@ -52,7 +58,7 @@ func (w EnvironmentVariablePKProvider) LoadKeyUid(context string, keyPair string
 	return "", fmt.Errorf("one of %s or %s environment variables should be defined", specificContextKeyParVar, genericVar)
 }
 
-func (w EnvironmentVariablePKProvider) loadKeyFromEnvVar(envVarName string) (*rsa.PrivateKey, error, bool) {
+func (w EnvironmentVariableKProvider) loadKeyFromEnvVar(envVarName string) (*rsa.PrivateKey, error, bool) {
 	keyData := w.Environment.Getenv(envVarName)
 	if keyData != "" {
 		key, err := jwt.ParseRSAPrivateKeyFromPEM([]byte(keyData))

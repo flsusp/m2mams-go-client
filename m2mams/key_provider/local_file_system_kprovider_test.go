@@ -11,7 +11,7 @@ func TestLoadKeyFromFile(t *testing.T) {
 	usr, err := user.Current()
 
 	fs := afero.NewMemMapFs()
-	pkp := LocalFileSystemPKProvider{
+	pkp := LocalFileSystemKProvider{
 		FileSystem: fs,
 	}
 
@@ -26,7 +26,7 @@ func TestLoadKeyFromFile(t *testing.T) {
 
 func TestLoadKeyFailsOnMissingFile(t *testing.T) {
 	fs := afero.NewMemMapFs()
-	pkp := LocalFileSystemPKProvider{
+	pkp := LocalFileSystemKProvider{
 		FileSystem: fs,
 	}
 
@@ -38,7 +38,7 @@ func TestLoadKeyUidFromFile(t *testing.T) {
 	usr, err := user.Current()
 
 	fs := afero.NewMemMapFs()
-	pkp := LocalFileSystemPKProvider{
+	pkp := LocalFileSystemKProvider{
 		FileSystem: fs,
 	}
 

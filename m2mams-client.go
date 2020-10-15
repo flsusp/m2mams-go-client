@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	pkp := pkp2.LocalFileSystemPKProvider{}
+	pkp := pkp2.LocalFileSystemKProvider{}
 	key, err := pkp.LoadPrivateKey("m2mams", "test2")
 	panicOnError(err)
 	fmt.Print(key)

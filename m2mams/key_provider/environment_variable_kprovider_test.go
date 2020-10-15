@@ -8,7 +8,7 @@ import (
 
 func TestLoadKeyFromSpecificVar(t *testing.T) {
 	fakeEnv := m2mams.NewFakeEnv()
-	pkp := EnvironmentVariablePKProvider{
+	pkp := EnvironmentVariableKProvider{
 		Environment: fakeEnv,
 	}
 
@@ -22,7 +22,7 @@ func TestLoadKeyFromSpecificVar(t *testing.T) {
 
 func TestLoadKeyFromGenericVar(t *testing.T) {
 	fakeEnv := m2mams.NewFakeEnv()
-	pkp := EnvironmentVariablePKProvider{
+	pkp := EnvironmentVariableKProvider{
 		Environment: fakeEnv,
 	}
 
@@ -36,7 +36,7 @@ func TestLoadKeyFromGenericVar(t *testing.T) {
 
 func TestFailsLoadingKeyIfEnvVarsNotFound(t *testing.T) {
 	fakeEnv := m2mams.NewFakeEnv()
-	pkp := EnvironmentVariablePKProvider{
+	pkp := EnvironmentVariableKProvider{
 		Environment: fakeEnv,
 	}
 
@@ -47,7 +47,7 @@ func TestFailsLoadingKeyIfEnvVarsNotFound(t *testing.T) {
 
 func TestLoadKeyUidFromSpecificVar(t *testing.T) {
 	fakeEnv := m2mams.NewFakeEnv()
-	pkp := EnvironmentVariablePKProvider{
+	pkp := EnvironmentVariableKProvider{
 		Environment: fakeEnv,
 	}
 
@@ -60,7 +60,7 @@ func TestLoadKeyUidFromSpecificVar(t *testing.T) {
 
 func TestLoadKeyUidFromGenericVar(t *testing.T) {
 	fakeEnv := m2mams.NewFakeEnv()
-	pkp := EnvironmentVariablePKProvider{
+	pkp := EnvironmentVariableKProvider{
 		Environment: fakeEnv,
 	}
 

@@ -18,7 +18,7 @@ func TestGenerateSignedToken(t *testing.T) {
 	usr, _ := user.Current()
 
 	fs := afero.NewMemMapFs()
-	pkp := m2mams_pkp.LocalFileSystemPKProvider{
+	pkp := m2mams_pkp.LocalFileSystemKProvider{
 		FileSystem: fs,
 	}
 

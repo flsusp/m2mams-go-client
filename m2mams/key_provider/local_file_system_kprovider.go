@@ -10,17 +10,17 @@ import (
 	"strings"
 )
 
-type LocalFileSystemPKProvider struct {
+type LocalFileSystemKProvider struct {
 	FileSystem afero.Fs
 }
 
-func NewLocalFileSystemPKProvider() LocalFileSystemPKProvider {
-	return LocalFileSystemPKProvider{
+func NewLocalFileSystemKProvider() KeyProvider {
+	return LocalFileSystemKProvider{
 		FileSystem: afero.NewOsFs(),
 	}
 }
 
-func (w LocalFileSystemPKProvider) LoadPrivateKey(context string, keyPair string) (*rsa.PrivateKey, error) {
+func (w LocalFileSystemKProvider) LoadPrivateKey(context string, keyPair string) (*rsa.PrivateKey, error) {
 	usr, err := user.Current()
 	if err != nil {
 		return nil, err
@@ -46,7 +46,7 @@ func (w LocalFileSystemPKProvider) LoadPrivateKey(context string, keyPair string
 	return key, nil
 }
 
-func (w LocalFileSystemPKProvider) LoadKeyUid(context string, keyPair string) (string, error) {
+func (w LocalFileSystemKProvider) LoadKeyUid(context string, keyPair string) (string, error) {
 	usr, err := user.Current()
 	if err != nil {
 		return "", err
