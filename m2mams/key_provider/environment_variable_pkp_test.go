@@ -1,4 +1,4 @@
-package m2mams_pkp
+package kprovider
 
 import (
 	"github.com/flsusp/m2mams-go-client/m2mams"

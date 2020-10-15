@@ -2,7 +2,7 @@ package m2mams_signer
 
 import (
 	"github.com/dgrijalva/jwt-go"
-	m2mamspkp "github.com/flsusp/m2mams-go-client/m2mams/pkp"
+	m2mamspkp "github.com/flsusp/m2mams-go-client/m2mams/key_provider"
 	"time"
 )
 

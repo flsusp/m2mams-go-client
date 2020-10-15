@@ -1,4 +1,4 @@
-package m2mams_pkp
+package kprovider
 
 import (
 	"github.com/spf13/afero"
