@@ -7,13 +7,13 @@ import (
 )
 
 type Signer struct {
-	privateKeyProvider m2mamspkp.PrivateKeyProvider
+	privateKeyProvider m2mamspkp.KeyProvider
 	context            string
 	keyPair            string
 }
 
 func (s Signer) generateSignedToken() (string, error) {
-	key, err := s.privateKeyProvider.LoadKey(s.context, s.keyPair)
+	key, err := s.privateKeyProvider.LoadPrivateKey(s.context, s.keyPair)
 	if err != nil {
 		return "", err
 	}

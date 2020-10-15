@@ -20,7 +20,7 @@ func NewLocalFileSystemPKProvider() LocalFileSystemPKProvider {
 	}
 }
 
-func (w LocalFileSystemPKProvider) LoadKey(context string, keyPair string) (*rsa.PrivateKey, error) {
+func (w LocalFileSystemPKProvider) LoadPrivateKey(context string, keyPair string) (*rsa.PrivateKey, error) {
 	usr, err := user.Current()
 	if err != nil {
 		return nil, err

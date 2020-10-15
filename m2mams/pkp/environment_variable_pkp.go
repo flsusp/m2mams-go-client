@@ -12,7 +12,7 @@ type EnvironmentVariablePKProvider struct {
 	Environment m2mams.Environment
 }
 
-func (w EnvironmentVariablePKProvider) LoadKey(context string, keyPair string) (*rsa.PrivateKey, error) {
+func (w EnvironmentVariablePKProvider) LoadPrivateKey(context string, keyPair string) (*rsa.PrivateKey, error) {
 	genericVar := "M2MAMS-PK"
 	specificContextKeyParVar := strings.ToUpper(fmt.Sprintf("%s-%s-PK", context, keyPair))
 

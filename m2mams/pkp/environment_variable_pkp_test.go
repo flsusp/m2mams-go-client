@@ -14,7 +14,7 @@ func TestLoadKeyFromSpecificVar(t *testing.T) {
 
 	fakeEnv.Setenv("SOMECONTEXT-SOMEKEYPAIR-PK", validPrivateKey)
 
-	key, err := pkp.LoadKey("somecontext", "somekeypair")
+	key, err := pkp.LoadPrivateKey("somecontext", "somekeypair")
 	assert.NoError(t, err)
 	err = key.Validate()
 	assert.NoError(t, err)
@@ -28,7 +28,7 @@ func TestLoadKeyFromGenericVar(t *testing.T) {
 
 	fakeEnv.Setenv("M2MAMS-PK", validPrivateKey)
 
-	key, err := pkp.LoadKey("somecontext", "somekeypair")
+	key, err := pkp.LoadPrivateKey("somecontext", "somekeypair")
 	assert.NoError(t, err)
 	err = key.Validate()
 	assert.NoError(t, err)
@@ -40,7 +40,7 @@ func TestFailsLoadingKeyIfEnvVarsNotFound(t *testing.T) {
 		Environment: fakeEnv,
 	}
 
-	key, err := pkp.LoadKey("somecontext", "somekeypair")
+	key, err := pkp.LoadPrivateKey("somecontext", "somekeypair")
 	assert.Error(t, err)
 	assert.Nil(t, key)
 }

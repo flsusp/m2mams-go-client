@@ -18,7 +18,7 @@ func TestLoadKeyFromFile(t *testing.T) {
 	fs.MkdirAll(usr.HomeDir+"/.somecontext", 0755)
 	afero.WriteFile(fs, usr.HomeDir+"/.somecontext/somekeypair", []byte(validPrivateKey), 0644)
 
-	key, err := pkp.LoadKey("somecontext", "somekeypair")
+	key, err := pkp.LoadPrivateKey("somecontext", "somekeypair")
 	assert.NoError(t, err)
 	err = key.Validate()
 	assert.NoError(t, err)
@@ -30,7 +30,7 @@ func TestLoadKeyFailsOnMissingFile(t *testing.T) {
 		FileSystem: fs,
 	}
 
-	_, err := pkp.LoadKey("somecontext", "somekeypair")
+	_, err := pkp.LoadPrivateKey("somecontext", "somekeypair")
 	assert.Error(t, err)
 }
 
