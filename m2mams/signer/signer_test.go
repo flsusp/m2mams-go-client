@@ -3,7 +3,7 @@ package m2mams_signer
 import (
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
-	m2mams_pkp "github.com/flsusp/m2mams-go-client/m2mams/key_provider"
+	kprovider "github.com/flsusp/m2mams-go-client/m2mams/key_provider"
 	"github.com/spf13/afero"
 	"github.com/stretchr/testify/assert"
 	"os/user"
@@ -18,7 +18,7 @@ func TestGenerateSignedToken(t *testing.T) {
 	usr, _ := user.Current()
 
 	fs := afero.NewMemMapFs()
-	pkp := m2mams_pkp.LocalFileSystemKProvider{
+	pkp := kprovider.LocalFileSystemKProvider{
 		FileSystem: fs,
 	}
 
@@ -28,12 +28,12 @@ func TestGenerateSignedToken(t *testing.T) {
 	afero.WriteFile(fs, usr.HomeDir+"/.somecontext/somekeypair.pub.pem", []byte(validPublicKeyPem), 0644)
 
 	signer := Signer{
-		privateKeyProvider: pkp,
-		context:            "somecontext",
-		keyPair:            "somekeypair",
+		KeyProvider: pkp,
+		Context:     "somecontext",
+		KeyPair:     "somekeypair",
 	}
 
-	token, err := signer.generateSignedToken()
+	token, err := signer.GenerateSignedToken()
 	assert.NoError(t, err)
 
 	parsedToken, err := jwt.Parse(token, func(token *jwt.Token) (interface{}, error) {

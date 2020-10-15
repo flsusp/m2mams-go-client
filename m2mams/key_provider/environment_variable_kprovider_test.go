@@ -12,7 +12,7 @@ func TestLoadKeyFromSpecificVar(t *testing.T) {
 		Environment: fakeEnv,
 	}
 
-	fakeEnv.Setenv("SOMECONTEXT-SOMEKEYPAIR-PK", validPrivateKey)
+	fakeEnv.Setenv("SOMECONTEXT_SOMEKEYPAIR_PK", validPrivateKey)
 
 	key, err := pkp.LoadPrivateKey("somecontext", "somekeypair")
 	assert.NoError(t, err)
@@ -26,7 +26,7 @@ func TestLoadKeyFromGenericVar(t *testing.T) {
 		Environment: fakeEnv,
 	}
 
-	fakeEnv.Setenv("M2MAMS-PK", validPrivateKey)
+	fakeEnv.Setenv("M2MAMS_PK", validPrivateKey)
 
 	key, err := pkp.LoadPrivateKey("somecontext", "somekeypair")
 	assert.NoError(t, err)
@@ -51,7 +51,7 @@ func TestLoadKeyUidFromSpecificVar(t *testing.T) {
 		Environment: fakeEnv,
 	}
 
-	fakeEnv.Setenv("SOMECONTEXT-SOMEKEYPAIR-UID", "someone@example.com")
+	fakeEnv.Setenv("SOMECONTEXT_SOMEKEYPAIR_UID", "someone@example.com")
 
 	uid, err := pkp.LoadKeyUid("somecontext", "somekeypair")
 	assert.NoError(t, err)
@@ -64,7 +64,7 @@ func TestLoadKeyUidFromGenericVar(t *testing.T) {
 		Environment: fakeEnv,
 	}
 
-	fakeEnv.Setenv("M2MAMS-UID", "someone@example.com")
+	fakeEnv.Setenv("M2MAMS_UID", "someone@example.com")
 
 	uid, err := pkp.LoadKeyUid("somecontext", "somekeypair")
 	assert.NoError(t, err)

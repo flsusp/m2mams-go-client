@@ -19,8 +19,8 @@ func NewEnvironmentVariableKProvider() KeyProvider {
 }
 
 func (w EnvironmentVariableKProvider) LoadPrivateKey(context string, keyPair string) (*rsa.PrivateKey, error) {
-	genericVar := "M2MAMS-PK"
-	specificContextKeyParVar := strings.ToUpper(fmt.Sprintf("%s-%s-PK", context, keyPair))
+	genericVar := "M2MAMS_PK"
+	specificContextKeyParVar := strings.ToUpper(fmt.Sprintf("%s_%s_PK", context, keyPair))
 
 	key, err, done := w.loadKeyFromEnvVar(specificContextKeyParVar)
 	if err != nil {
@@ -42,8 +42,8 @@ func (w EnvironmentVariableKProvider) LoadPrivateKey(context string, keyPair str
 }
 
 func (w EnvironmentVariableKProvider) LoadKeyUid(context string, keyPair string) (string, error) {
-	genericVar := "M2MAMS-UID"
-	specificContextKeyParVar := strings.ToUpper(fmt.Sprintf("%s-%s-UID", context, keyPair))
+	genericVar := "M2MAMS_UID"
+	specificContextKeyParVar := strings.ToUpper(fmt.Sprintf("%s_%s_UID", context, keyPair))
 
 	uid := w.Environment.Getenv(specificContextKeyParVar)
 	if uid != "" {

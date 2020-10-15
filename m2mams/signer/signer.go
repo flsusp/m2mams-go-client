@@ -7,24 +7,24 @@ import (
 )
 
 type Signer struct {
-	privateKeyProvider m2mamspkp.KeyProvider
-	context            string
-	keyPair            string
+	KeyProvider m2mamspkp.KeyProvider
+	Context     string
+	KeyPair     string
 }
 
-func (s Signer) generateSignedToken() (string, error) {
-	key, err := s.privateKeyProvider.LoadPrivateKey(s.context, s.keyPair)
+func (s Signer) GenerateSignedToken() (string, error) {
+	key, err := s.KeyProvider.LoadPrivateKey(s.Context, s.KeyPair)
 	if err != nil {
 		return "", err
 	}
-	uid, err := s.privateKeyProvider.LoadKeyUid(s.context, s.keyPair)
+	uid, err := s.KeyProvider.LoadKeyUid(s.Context, s.KeyPair)
 	if err != nil {
 		return "", err
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodRS512, jwt.MapClaims{
 		"uid": uid,
-		"kp":  s.keyPair,
+		"kp":  s.KeyPair,
 		"ts":  time.Now().Unix(),
 	})
 	tokenString, err := token.SignedString(key)
