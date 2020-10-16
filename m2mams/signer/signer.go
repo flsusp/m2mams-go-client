@@ -2,12 +2,12 @@ package signer
 
 import (
 	"github.com/dgrijalva/jwt-go"
-	m2mamspkp "github.com/flsusp/m2mams-signer-go/m2mams/kprovider"
+	"github.com/flsusp/m2mams-signer-go/m2mams/kprovider"
 	"time"
 )
 
 type Signer struct {
-	KeyProvider m2mamspkp.KeyProvider
+	KeyProvider kprovider.KeyProvider
 	Context     string
 	KeyPair     string
 }
