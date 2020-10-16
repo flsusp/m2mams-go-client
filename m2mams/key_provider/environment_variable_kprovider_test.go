@@ -1,7 +1,7 @@
 package kprovider
 
 import (
-	"github.com/flsusp/m2mams-go-client/m2mams"
+	"github.com/flsusp/m2mams-signer-go/m2mams"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

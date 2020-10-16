@@ -4,7 +4,7 @@ import (
 	"crypto/rsa"
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
-	"github.com/flsusp/m2mams-go-client/m2mams"
+	"github.com/flsusp/m2mams-signer-go/m2mams"
 	"strings"
 )
 

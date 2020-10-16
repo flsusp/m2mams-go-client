@@ -3,7 +3,7 @@ package m2mams_signer
 import (
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
-	kprovider "github.com/flsusp/m2mams-go-client/m2mams/key_provider"
+	kprovider "github.com/flsusp/m2mams-signer-go/m2mams/key_provider"
 	"github.com/spf13/afero"
 	"github.com/stretchr/testify/assert"
 	"os/user"
