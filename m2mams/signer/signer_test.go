@@ -38,7 +38,7 @@ func TestGenerateSignedToken(t *testing.T) {
 
 	parsedToken, err := jwt.Parse(token, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodRSA); !ok {
-			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
+			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 		}
 		return jwt.ParseRSAPublicKeyFromPEM([]byte(validPublicKeyPem))
 	})

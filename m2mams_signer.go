@@ -8,8 +8,6 @@ import (
 	"os"
 )
 
-var app = cli.NewApp()
-
 func main() {
 	var keyProvider string
 
