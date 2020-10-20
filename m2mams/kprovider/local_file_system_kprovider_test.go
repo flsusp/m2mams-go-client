@@ -15,10 +15,10 @@ func TestLoadKeyFromFile(t *testing.T) {
 		FileSystem: fs,
 	}
 
-	fs.MkdirAll(usr.HomeDir+"/.somecontext", 0755)
-	afero.WriteFile(fs, usr.HomeDir+"/.somecontext/somekeypair", []byte(validPrivateKey), 0644)
+	fs.MkdirAll(usr.HomeDir+"/.somecontext/your_email@example.com", 0755)
+	afero.WriteFile(fs, usr.HomeDir+"/.somecontext/your_email@example.com/somekeypair", []byte(validPrivateKey), 0644)
 
-	key, err := pkp.LoadPrivateKey("somecontext", "somekeypair")
+	key, err := pkp.LoadPrivateKey("your_email@example.com", "somecontext", "somekeypair")
 	assert.NoError(t, err)
 	err = key.Validate()
 	assert.NoError(t, err)
@@ -30,22 +30,6 @@ func TestLoadKeyFailsOnMissingFile(t *testing.T) {
 		FileSystem: fs,
 	}
 
-	_, err := pkp.LoadPrivateKey("somecontext", "somekeypair")
+	_, err := pkp.LoadPrivateKey("your_email@example.com", "somecontext", "somekeypair")
 	assert.Error(t, err)
-}
-
-func TestLoadKeyUidFromFile(t *testing.T) {
-	usr, err := user.Current()
-
-	fs := afero.NewMemMapFs()
-	pkp := LocalFileSystemKProvider{
-		FileSystem: fs,
-	}
-
-	fs.MkdirAll(usr.HomeDir+"/.somecontext", 0755)
-	afero.WriteFile(fs, usr.HomeDir+"/.somecontext/somekeypair.pub", []byte(validPublicKey), 0644)
-
-	uid, err := pkp.LoadKeyUid("somecontext", "somekeypair")
-	assert.NoError(t, err)
-	assert.Equal(t, "your_email@example.com", uid)
 }

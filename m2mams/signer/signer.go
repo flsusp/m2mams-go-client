@@ -8,22 +8,19 @@ import (
 
 type Signer struct {
 	KeyProvider kprovider.KeyProvider
+	Uid         string
 	Context     string
 	KeyPair     string
 }
 
 func (s Signer) GenerateSignedToken() (string, error) {
-	key, err := s.KeyProvider.LoadPrivateKey(s.Context, s.KeyPair)
-	if err != nil {
-		return "", err
-	}
-	uid, err := s.KeyProvider.LoadKeyUid(s.Context, s.KeyPair)
+	key, err := s.KeyProvider.LoadPrivateKey(s.Uid, s.Context, s.KeyPair)
 	if err != nil {
 		return "", err
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodRS512, jwt.MapClaims{
-		"uid": uid,
+		"uid": s.Uid,
 		"kp":  s.KeyPair,
 		"ts":  time.Now().Unix(),
 	})
